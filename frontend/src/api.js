@@ -3,7 +3,13 @@
  * Centralized API client for all backend interactions
  */
 
-const BASE_URL = "/api";
+
+const API_URL = import.meta.env.VITE_API_URL || "";
+
+const BASE_URL = API_URL
+  ? `${API_URL.replace(/\/$/, "")}/api`
+  : "/api";
+
 
 async function request(path, options = {}) {
   const url = `${BASE_URL}${path}`;
@@ -16,7 +22,7 @@ async function request(path, options = {}) {
     try {
       const data = await res.json();
       detail = data.detail || JSON.stringify(data);
-    } catch (_) {}
+    } catch (_) { }
     throw new Error(detail);
   }
   if (res.status === 204) return null;
