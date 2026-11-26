@@ -6,7 +6,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    host: '0.0.0.0', allowedHosts: ['https://protective-wonder-production-928dd62c.up.railway.app/']
+    host: '0.0.0.0', allowedHosts: [
+      'protective-wonder-production-928dd62c.up.railway.app'
+    ],
     proxy: {
       '/api': {
         target: process.env.VITE_API_URL || 'http://127.0.0.1:8000',
